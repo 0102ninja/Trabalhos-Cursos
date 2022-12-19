@@ -1,0 +1,14 @@
+def calcular_total(numeros):
+    return sum (numeros)
+
+def retorna_antecessor_sucessor(numero):
+    antecessor = numero - 1
+    sucessor = numero + 1
+    
+    return antecessor,sucessor
+
+calcular_total([10,12,10])
+retorna_antecessor_sucessor(10)
+
+print(calcular_total([10,12,10]))
+print(retorna_antecessor_sucessor(12))
