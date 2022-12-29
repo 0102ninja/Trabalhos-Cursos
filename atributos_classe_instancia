@@ -1,0 +1,22 @@
+class Estudante():
+    escola = "dio"
+
+    def __init__(self,nome,matricula):
+        self.nome = nome
+        self.matricula = matricula
+    
+    def __str__(self):
+        return f"Nome:{self.nome}  Matricula:{self.matricula}  Escola:{self.escola}"
+
+def mostra_valor(*objs):
+    for obj in objs:
+        print(obj)
+        
+
+aluno_1 = Estudante("Silva", "001" )
+aluno_2 = Estudante("Maria", "002" )
+mostra_valor(aluno_1, aluno_2)
+
+Estudante.escola = "Mil grau"
+aluno_3 = Estudante("Rogerinho", "003")
+mostra_valor(aluno_1, aluno_2, aluno_3)
