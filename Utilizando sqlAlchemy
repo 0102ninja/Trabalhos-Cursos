@@ -1,0 +1,70 @@
+
+
+from sqlalchemy import Table, Text, text
+from sqlalchemy import MetaData
+from sqlalchemy import create_engine
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import ForeignKey
+
+engine = create_engine("sqlite:///:memory")
+
+metadata_obj = MetaData()
+
+
+user = Table(
+    "user",
+    metadata_obj,
+    Column("user_id", Integer, primary_key= True),
+    Column("user_name", String(40), nullable= False),
+    Column("email_adress,", String(60)),
+    Column("Nick_name", String(50), nullable= False ),
+
+)
+
+user_prefs = Table(
+
+    'user_prefs',
+    metadata_obj,
+    Column("pref_id", Integer, primary_key=True),
+    Column("user_id", Integer, ForeignKey("user.user_id"), nullable=False),
+    Column("pref_name", String(40), nullable= False),
+    Column("pref_value", String(100)),
+
+)
+print("Info da tabela Users")
+print(user_prefs.primary_key)
+# print(user_prefs.constraints)
+
+for table in metadata_obj.sorted_tables:
+    print(table)
+
+metadata_obj.create_all(engine)
+
+metadata_bd_obj = MetaData()
+financial_info = Table (
+    "financial_info",
+    metadata_bd_obj,
+    Column("id", Integer, primary_key= True),
+    Column("Value", String(100), nullable =False),
+)
+
+#insirindo info na tabela user.
+sql_insert = text( "insert into user values(1,'julia', 'email@email.com', 'ju')" ) 
+engine.execute(sql_insert)
+
+
+print("\n Info da tabela financial_info")
+print(financial_info.primary_key)
+print(financial_info.constraints)
+
+print("Executando statement sql ")
+sql = Text('select * from user' )
+result = engine.execute(sql)
+for row in result:
+    print(row)
+
+print(engine.execute(sql))
+print(row)
+
